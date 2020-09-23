@@ -1,5 +1,7 @@
 document.addEventListener("DOMContentLoaded", function() {
 
+
+
   /**
    * Form Select
    */
@@ -164,6 +166,46 @@ document.addEventListener("DOMContentLoaded", function() {
       this.$step.parentElement.hidden = this.currentStep >= 5;
 
       // TODO: get data from inputs and show them in summary
+
+      /**
+       * Category in summary
+       */
+
+      let checkboxCategory = $('#categoryCheckbox:checked');
+      let categoryResult=$('#category-result');
+      let categoryValue = [];
+
+      checkboxCategory.each(function (index, element) {
+        categoryValue.push($(element).siblings('span').text())
+      })
+      categoryResult.text(categoryValue);
+
+      /**
+       * Foundation in summary
+       */
+      let radioFoundation =$('#foundationRadio:checked');
+      let institution = $('#foundation-result')
+      institution.text(radioFoundation.siblings('span').children('.title').text());
+      /**
+       * Address in summary
+       */
+
+      $('#street-result').text($('#street').val());
+      $('#city-result').text($('#city').val());
+      $('#zipCode-result').text($('#zip').val());
+      $('#phone-result').text($('#numberPhone').val());
+      /**
+       * Data , time and comment in summary
+       */
+      $('#data-result').text($('#data').val());
+      $('#time-result').text($('#time').val())
+      $('#comment-result').text($('#comment').val())
+
+
+
+
+
+
     }
 
   }
