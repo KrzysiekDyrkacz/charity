@@ -151,8 +151,147 @@ document.addEventListener("DOMContentLoaded", function() {
      */
     updateForm() {
       this.$step.innerText = this.currentStep;
+      let current = this.currentStep;
 
       // TODO: Validation
+
+      switch (this.currentStep) {
+        case 1:
+          step01();
+          break;
+
+          case 2:
+          step02();
+          break;
+
+          case 3:
+          step03();
+          break;
+
+          case 4:
+          step04();
+          break;
+      }
+
+      function step01(){
+        let btn1 =$('#btn-1')
+        btn1.hide()
+        let checkboxCat = $('input[name=categoryList]')
+        checkboxCat.each(function (index,element){
+          $(element).change(function (){
+            btn1.show()
+          })
+        })
+
+
+      }
+
+      function step02(){
+        let btn2 = $('#btn-2')
+        btn2.hide()
+        let quantityInput =$('#quantity');
+
+        quantityInput.mouseleave(function (){
+          if (quantityInput.val()>0){
+            btn2.show()
+          }else {
+            alert("podaj liczbę worków większą od zera")
+          }
+        })
+
+      }
+      function step03(){
+        let btn3=$('#btn-3')
+        btn3.hide()
+        let radioInstitution = $('input[name=institution]')
+
+        radioInstitution.each(function (index,element){
+          $(element).change(function (){
+            btn3.show()
+          })
+        })
+
+
+      }
+      function step04(){
+        let btn4 = $('#btn-4')
+        btn4.hide();
+        let arrTrue = [false,false,false,false,false,false];
+
+
+        let street = $('#street')
+        let city = $('#city')
+        let zip = $('#zip')
+        let phone = $('#numberPhone')
+        let data = $('#data')
+        let time = $('#time')
+
+        street.blur(function (){
+          if (street.val()!==""){
+            arrTrue[0]=true;
+          }else {
+            alert("nazwa ulicy nie może być pusta")
+          }
+          checkAllInput()
+        })
+
+        city.blur(function (){
+          if (city.val()!==""){
+            arrTrue[1]=true;
+          }else {
+            alert("nazwa miasta nie może być pusta")
+          }
+          checkAllInput()
+        })
+
+        zip.blur(function (){
+          if (zip.val()!==""&& zip.val().length===5){
+            arrTrue[2]=true;
+          }else {
+            alert("kod pocztowy musi mieć 5 cyfr")
+          }
+          checkAllInput()
+        })
+
+        phone.blur(function (){
+          if (phone.val()!=="" && phone.val().length===9){
+            arrTrue[3]=true;
+          }else {
+            alert("numer telefonu musi mieć 9 cyfr")
+          }
+          checkAllInput()
+        })
+
+        data.blur(function (){
+          if (data.val()!=="" ){
+            arrTrue[4]=true;
+          }
+          checkAllInput()
+        })
+
+        time.blur(function (){
+          if (time.val()!=="" && time.val().match("^([0-1][0-9]|[2][0-3]):([0-5][0-9])$")){
+            arrTrue[5]=true;
+          }else {
+            alert("podaj poprawną godzine")
+          }
+          checkAllInput()
+          console.log(arrTrue)
+
+
+        })
+
+        function checkAllInput(){
+          if (arrTrue.every(function(element, index, array) {
+            return element === true;
+          })){
+            btn4.show()
+          }
+        }
+
+
+
+      }
 
       this.slides.forEach(slide => {
         slide.classList.remove("active");
@@ -171,19 +310,19 @@ document.addEventListener("DOMContentLoaded", function() {
        * Category in summary
        */
 
-      let checkboxCategory = $('#categoryCheckbox:checked');
+      let checkboxCategory = $('input[name=categoryList]:checked');
       let categoryResult=$('#category-result');
       let categoryValue = [];
 
       checkboxCategory.each(function (index, element) {
         categoryValue.push($(element).siblings('span').text())
       })
-      categoryResult.text(categoryValue);
+      categoryResult.text($('#quantity').val() + " worki " +categoryValue);
 
       /**
        * Foundation in summary
        */
-      let radioFoundation =$('#foundationRadio:checked');
+      let radioFoundation =$('input[name=institution]:checked');
       let institution = $('#foundation-result')
       institution.text(radioFoundation.siblings('span').children('.title').text());
       /**
@@ -200,12 +339,6 @@ document.addEventListener("DOMContentLoaded", function() {
       $('#data-result').text($('#data').val());
       $('#time-result').text($('#time').val())
       $('#comment-result').text($('#comment').val())
-
-
-
-
-
-
     }
 
   }

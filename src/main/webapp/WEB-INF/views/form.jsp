@@ -54,7 +54,7 @@
 
                 </c:forEach>
                 <div class="form-group form-group--buttons">
-                    <button type="button" class="btn next-step">Dalej</button>
+                    <button id="btn-1" type="button" class="btn next-step" >Dalej</button>
                 </div>
             </div>
 
@@ -65,13 +65,13 @@
                 <div class="form-group form-group--inline">
                     <label>
                         Liczba 60l worków:
-                        <form:input type="number" path="quantity" step="1" min="1" />
+                        <form:input id="quantity" type="number" path="quantity" step="1" min="1" />
                     </label>
                 </div>
 
                 <div class="form-group form-group--buttons">
                     <button type="button" class="btn prev-step">Wstecz</button>
-                    <button type="button" class="btn next-step">Dalej</button>
+                    <button id="btn-2" type="button" class="btn next-step">Dalej</button>
                 </div>
             </div>
 
@@ -98,13 +98,9 @@
 
                 </c:forEach>
 
-
-
-
-
                 <div class="form-group form-group--buttons">
                     <button type="button" class="btn prev-step">Wstecz</button>
-                    <button type="button" class="btn next-step">Dalej</button>
+                    <button id="btn-3" type="button" class="btn next-step">Dalej</button>
                 </div>
             </div>
 
@@ -125,13 +121,13 @@
 
                         <div class="form-group form-group--inline">
                             <label>
-                                Kod pocztowy <form:input id="zip" type="text" name="postcode" path="zipCode" />
+                                Kod pocztowy <form:input id="zip" type="text" name="postcode" path="zipCode" maxlength="5" />
                             </label>
                         </div>
 
                         <div class="form-group form-group--inline">
                             <label>
-                                Numer telefonu <form:input id="numberPhone" type="phone" name="phone" path="phoneNumber" />
+                                Numer telefonu <form:input id="numberPhone" type="phone" name="phone" path="phoneNumber" maxlength="9" />
                             </label>
                         </div>
                     </div>
@@ -156,7 +152,7 @@
                 </div>
                 <div class="form-group form-group--buttons">
                     <button type="button" class="btn prev-step">Wstecz</button>
-                    <button type="button" class="btn next-step">Dalej</button>
+                    <button id="btn-4" type="button" class="btn next-step">Dalej</button>
                 </div>
             </div>
 
